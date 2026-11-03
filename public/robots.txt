@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://gleaming-stardust-a6c7e7.netlify.app/sitemap.xml
+Sitemap: https://farid-hilmi-portfolio.netlify.app/sitemap.xml

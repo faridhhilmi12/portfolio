@@ -31,7 +31,7 @@ npm run build    # tsc + build ke dist/
 - **Pasangan Desain↔Kode** (skill yang ikut menyala): `pairs` di `src/data/skills.ts`.
 
 ## Alamat situs
-Alamat situs saat ini `https://gleaming-stardust-a6c7e7.netlify.app/` tertulis di tempat berikut. Kalau domain berubah (misalnya setelah mengganti nama situs di Netlify atau memakai domain sendiri), ganti di semuanya:
+Alamat situs saat ini `https://farid-hilmi-portfolio.netlify.app/` tertulis di tempat berikut. Kalau domain berubah (misalnya setelah mengganti nama situs di Netlify atau memakai domain sendiri), ganti di semuanya:
 - `index.html`: `canonical`, `og:url`, `og:image`, `twitter:image`, dan JSON-LD (`url`, `image`)
 - `public/robots.txt`
 - `public/sitemap.xml`
