@@ -2,6 +2,8 @@ import type { MessageKey } from './id'
 
 export const en: Record<MessageKey, string> = {
   'skip': 'Skip to work',
+  'nav.label': 'Main navigation',
+  'lang.label': 'Bahasa / Language',
   'nav.work': 'Work',
   'nav.exp': 'Experience',
   'nav.skills': 'Skills',

@@ -1,5 +1,7 @@
 export const id = {
   'skip': 'Langsung ke karya',
+  'nav.label': 'Navigasi utama',
+  'lang.label': 'Bahasa / Language',
   'nav.work': 'Karya',
   'nav.exp': 'Pengalaman',
   'nav.skills': 'Keahlian',
