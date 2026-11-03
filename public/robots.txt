@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://faridhhilmi12.netlify.app/sitemap.xml
