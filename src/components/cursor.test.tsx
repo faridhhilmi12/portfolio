@@ -27,7 +27,7 @@ describe('CollaboratorCursor', () => {
 
   it('stays invisible until a target has been measured', () => {
     renderCursor()
-    expect(screen.getByTestId('collaborator-cursor')).toHaveStyle({ opacity: '0' })
+    expect(screen.getByTestId('collaborator-cursor')).toHaveClass('opacity-0')
   })
 
   it('renders a decorative cursor labelled Farid with a mouse', () => {

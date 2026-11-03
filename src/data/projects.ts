@@ -1,4 +1,11 @@
+import type { MessageKey } from '../i18n/id'
+
 export type Wire = 'app' | 'dashboard' | 'lms' | 'site'
+
+/** Kunci kamus untuk teks proyek, mis. projectKey('p1', 'title') → 'work.p1.title'. */
+export function projectKey(id: Project['id'], field: 'role' | 'title' | 'sub' | 'desc' | 'note'): MessageKey {
+  return `work.${id}.${field}` as MessageKey
+}
 
 export interface Project {
   id: 'p1' | 'p2' | 'p3' | 'p4'

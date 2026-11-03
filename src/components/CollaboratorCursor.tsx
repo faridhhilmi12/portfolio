@@ -42,9 +42,11 @@ export function CollaboratorCursor({ targets }: { targets: RefObject<HTMLElement
       ref={ref}
       data-testid="collaborator-cursor"
       aria-hidden="true"
-      className="pointer-events-none absolute left-0 top-0 z-20 hidden md:block"
+      className={`pointer-events-none absolute left-0 top-0 z-20 hidden transition-opacity duration-300 md:block ${
+        pos ? 'opacity-100' : 'opacity-0'
+      }`}
       initial={false}
-      animate={{ x: pos?.x ?? 0, y: pos?.y ?? 0, opacity: pos ? 1 : 0 }}
+      animate={{ x: pos?.x ?? 0, y: pos?.y ?? 0 }}
       transition={pos?.instant ? { duration: 0 } : { type: 'spring', stiffness: 50, damping: 16 }}
     >
       <svg width="18" height="22" viewBox="0 0 18 22" className="text-select drop-shadow">

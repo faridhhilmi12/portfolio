@@ -21,7 +21,7 @@ export function DotGrid({ className = '', children }: { className?: string; chil
   }, [parallax, x, y])
 
   return (
-    <div className={`relative isolate ${className}`}>
+    <div className={`relative isolate overflow-x-clip ${className}`}>
       <motion.div
         aria-hidden="true"
         className="pointer-events-none absolute -inset-4 -z-10 opacity-70"

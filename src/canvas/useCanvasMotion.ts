@@ -1,16 +1,4 @@
-import { useEffect, useState } from 'react'
-
-function useMedia(query: string): boolean {
-  const [matches, setMatches] = useState(() => window.matchMedia(query).matches)
-  useEffect(() => {
-    const mq = window.matchMedia(query)
-    const onChange = () => setMatches(mq.matches)
-    onChange()
-    mq.addEventListener('change', onChange)
-    return () => mq.removeEventListener('change', onChange)
-  }, [query])
-  return matches
-}
+import { useMedia } from '../lib/useMedia'
 
 /** animate: gerak boleh jalan. finePointer: ada mouse (kursor, parallax, drag). */
 export function useCanvasMotion(): { animate: boolean; finePointer: boolean } {

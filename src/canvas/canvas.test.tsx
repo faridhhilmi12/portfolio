@@ -65,6 +65,11 @@ describe('DotGrid', () => {
     render(<DotGrid><span>konten</span></DotGrid>)
     expect(screen.getByText('konten')).toBeInTheDocument()
   })
+
+  it('clips horizontal overflow so the bleeding dot layer cannot cause a horizontal scrollbar', () => {
+    const { container } = render(<DotGrid><span>konten</span></DotGrid>)
+    expect(container.firstElementChild).toHaveClass('overflow-x-clip')
+  })
 })
 
 describe('Reveal', () => {
