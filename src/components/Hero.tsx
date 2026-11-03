@@ -1,4 +1,6 @@
+import { useRef } from 'react'
 import { motion } from 'motion/react'
+import { CollaboratorCursor } from './CollaboratorCursor'
 import { DotGrid } from '../canvas/DotGrid'
 import { SelectionBox } from '../canvas/SelectionBox'
 import { useCanvasMotion } from '../canvas/useCanvasMotion'
@@ -10,6 +12,10 @@ export function Hero() {
   const t = useT()
   const { animate, finePointer } = useCanvasMotion()
   const draggable = animate && finePointer
+  const nameRef = useRef<HTMLHeadingElement>(null)
+  const photoRef = useRef<HTMLElement>(null)
+  const ctaRef = useRef<HTMLAnchorElement>(null)
+  const cursorTargets = [nameRef, photoRef, ctaRef]
 
   const photo = (
     <>
@@ -36,7 +42,7 @@ export function Hero() {
         <div>
           <p className="mb-2.5 text-[13px] font-medium text-muted">{t('hero.frame')}</p>
           <SelectionBox showSize badge={t('hero.badge')} className="-ml-2.5 px-2.5 pb-2.5 pt-2 md:-ml-3.5 md:px-3.5 md:pb-3 md:pt-2.5">
-            <h1 className="text-[clamp(44px,7.4vw,92px)] font-extrabold leading-[0.98] tracking-[-0.035em]">
+            <h1 ref={nameRef} className="text-[clamp(44px,7.4vw,92px)] font-extrabold leading-[0.98] tracking-[-0.035em]">
               Muhammad{' '}
               <br />
               Farid Hilmi
@@ -50,6 +56,7 @@ export function Hero() {
           <p className="mt-11 max-w-[34em] text-[clamp(17px,1.6vw,19px)] text-muted md:mt-0">{t('hero.lead')}</p>
           <div className="mt-7 flex flex-wrap gap-3">
             <a
+              ref={ctaRef}
               href="#karya"
               className="inline-flex min-h-[46px] items-center justify-center rounded-lg border-[1.5px] border-transparent bg-ink px-5 text-[15.5px] font-semibold text-paper no-underline transition-colors hover:bg-select-strong hover:text-white active:translate-y-px"
             >
@@ -65,6 +72,7 @@ export function Hero() {
         </div>
         {draggable ? (
           <motion.figure
+            ref={photoRef}
             data-drag="true"
             drag
             dragSnapToOrigin
@@ -75,11 +83,12 @@ export function Hero() {
             {photo}
           </motion.figure>
         ) : (
-          <figure data-drag="false" className={photoClass}>
+          <figure ref={photoRef} data-drag="false" className={photoClass}>
             {photo}
           </figure>
         )}
       </header>
+      <CollaboratorCursor targets={cursorTargets} />
     </DotGrid>
   )
 }
