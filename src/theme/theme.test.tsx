@@ -49,6 +49,18 @@ describe('ThemeProvider', () => {
     expect(root.classList.contains('no-anim')).toBe(true)
   })
 
+  it('restores transitions even when animation frames never fire', () => {
+    vi.useFakeTimers()
+    vi.spyOn(window, 'requestAnimationFrame').mockImplementation(() => 0)
+    localStorage.setItem('theme', 'light')
+    render(<ThemeProvider><Probe /></ThemeProvider>)
+    act(() => screen.getByText('toggle').click())
+    expect(root.classList.contains('no-anim')).toBe(true)
+    act(() => { vi.advanceTimersByTime(300) })
+    expect(root.classList.contains('no-anim')).toBe(false)
+    vi.useRealTimers()
+  })
+
   it('still toggles when storage is blocked', () => {
     vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => { throw new Error('blocked') })
     vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => { throw new Error('blocked') })

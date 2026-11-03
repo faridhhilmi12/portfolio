@@ -74,7 +74,7 @@ export function SelectionBox({ selected = true, badge, showSize = false, classNa
             <motion.span
               data-testid="size-label"
               aria-hidden="true"
-              className="absolute right-0 top-full mt-2 rounded bg-select-strong px-1.5 py-px text-[11px] font-semibold tabular-nums text-white"
+              className="absolute right-0 top-full mt-2 rounded max-md:hidden bg-select-strong px-1.5 py-px text-[11px] font-semibold tabular-nums text-white"
               {...pop}
             >
               {`${Math.round(size.w)} × ${Math.round(size.h)}`}

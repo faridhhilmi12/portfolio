@@ -1,28 +1,50 @@
 # Portofolio Muhammad Farid Hilmi
 
-Website statis (HTML, CSS, JavaScript), tanpa build tool.
+Vite + React + TypeScript + Tailwind CSS v4, dengan interaksi "kanvas Figma" (`motion`). Satu halaman, tanpa router.
+
+## Perintah
+```bash
+npm install
+npm run dev      # server pengembangan
+npm test         # Vitest
+npm run build    # tsc + build ke dist/
+```
 
 ## Struktur
-- `index.html` — isi halaman (teks Bahasa Indonesia ada di sini), plus metadata SEO dan data terstruktur JSON-LD
-- `styles.css` — tampilan; warna & font diatur di bagian `:root`, token mode gelap ada di bawahnya
-- `script.js` — link kontak (`LINKS`), terjemahan Inggris (`EN`), tema, menu mobile, dan animasi scroll
-- `assets/farid.jpg` — foto profil (juga dipakai sebagai gambar pratinjau saat link dibagikan)
-- `robots.txt`, `sitemap.xml` — untuk mesin pencari
+| Lokasi | Isi |
+|---|---|
+| `index.html` | metadata SEO, JSON-LD, skrip tema/bahasa awal (tanpa kedip), `<noscript>` |
+| `src/data/` | isi tanpa teks: proyek, pengalaman, keahlian, link (`links.ts`) |
+| `src/i18n/` | `id.ts` (sumber kunci) dan `en.ts` (wajib kunci yang sama), `LangProvider` |
+| `src/theme/` | `ThemeProvider` (terang/gelap) |
+| `src/canvas/` | elemen kanvas bersama: `SelectionBox`, `DotGrid`, `Reveal`, `useCanvasMotion` |
+| `src/components/` | Nav, Hero, Projects, Timeline, Skills, Contact, Footer |
+| `src/index.css` | token warna dan font (`@theme`), termasuk token mode gelap |
+| `public/` | `assets/farid.jpg`, `robots.txt`, `sitemap.xml` |
+| `legacy/` | situs statis lama; boleh dihapus setelah Anda yakin |
 
-## Hal yang perlu diingat
-- Link kontak ada di `script.js` (objek `LINKS`). Link yang dibiarkan kosong otomatis disembunyikan.
-- Link sosial juga tertulis di JSON-LD pada `index.html`. Kalau `LINKS` berubah, ubah di sana juga.
-- Alamat situs `https://faridhhilmi12.github.io/portfolio/` tertulis di `index.html` (canonical, `og:url`, `og:image`, JSON-LD), `robots.txt`, dan `sitemap.xml`. Ganti semuanya kalau memakai domain lain.
-- Warna aksen biru ada di `--select` dan `--select-strong`. Ubah di dua tempat untuk mode gelap (blok `@media (prefers-color-scheme: dark)` dan `[data-theme="dark"]`).
-- Mode gelap mengikuti pengaturan sistem; tombol di navigasi menggantinya dan pilihannya tersimpan di browser.
+## Mengubah isi
+- **Teks:** ubah `src/i18n/id.ts` dan `src/i18n/en.ts` bersamaan. Build gagal kalau kunci EN ada yang terlewat.
+- **Proyek:** tambah atau ubah entri di `src/data/projects.ts`, lalu tambahkan teksnya (`work.<id>.role|title|sub|desc`) di kedua kamus. Isi `image` dengan jalur gambar (misalnya `/assets/waldo.png`, taruh file di `public/assets/`) untuk mengganti ilustrasi wireframe dengan screenshot asli.
+- **Link kontak:** `src/data/links.ts`. Link yang dikosongkan otomatis tidak ditampilkan.
+- **Warna aksen:** `--c-select` dan `--c-select-strong` di `src/index.css`, ada dua set (terang dan gelap).
+- **Pasangan Desain↔Kode** (skill yang ikut menyala): `pairs` di `src/data/skills.ts`.
 
-## Cara melihat di laptop
-Klik dua kali `index.html`, atau di VS Code pakai ekstensi Live Server.
+## Yang harus diganti sebelum rilis
+Alamat sementara `https://faridhhilmi12.netlify.app/` tertulis di:
+- `index.html`: `canonical`, `og:url`, `og:image`, `twitter:image`, dan JSON-LD (`url`, `image`)
+- `public/robots.txt`
+- `public/sitemap.xml`
 
-## Cara online gratis (GitHub Pages)
-1. Buat repository baru di GitHub, misalnya `portfolio`.
-2. Upload semua file di folder ini (atau `git push`).
-3. Settings → Pages → Source: branch `main`, folder `/root` → Save.
-4. Tunggu 1–2 menit. Alamatnya: `https://faridhhilmi12.github.io/portfolio/`
+Tautan sosial di JSON-LD (`index.html`) harus selalu sama dengan `src/data/links.ts`.
 
-Alternatif: seret folder ini ke https://app.netlify.com/drop
+## Deploy ke Netlify
+1. Dorong repo ini ke GitHub.
+2. Di Netlify: Add new site, Import from Git, pilih repo. Build command `npm run build`, publish directory `dist` (sudah diatur di `netlify.toml`).
+3. Setelah alamat final jelas, ganti alamat sementara di atas lalu push lagi.
+
+Vercel juga bisa: pilih preset Vite, tanpa berkas tambahan.
+
+## Catatan
+- Isi halaman dirender oleh JavaScript. Pratinjau tautan (LinkedIn, WhatsApp) memakai metadata statis di `index.html`, jadi tetap berfungsi. Jika kelak butuh isi yang terbaca tanpa JavaScript, tambahkan prerender.
+- Dengan `prefers-reduced-motion`, kursor kolaborator, parallax, drag foto, dan animasi masuk dimatikan.

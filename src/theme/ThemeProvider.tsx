@@ -50,7 +50,10 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     setTheme(next)
     root.dataset.theme = next
     writeStore('theme', next)
-    requestAnimationFrame(() => requestAnimationFrame(() => root.classList.remove('no-anim')))
+    const restore = () => root.classList.remove('no-anim')
+    requestAnimationFrame(() => requestAnimationFrame(restore))
+    // cadangan: rAF bisa tertahan (tab tersembunyi), transisi tidak boleh mati selamanya
+    window.setTimeout(restore, 150)
   }, [theme])
 
   const value = useMemo(() => ({ theme, toggle }), [theme, toggle])

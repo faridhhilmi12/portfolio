@@ -56,6 +56,8 @@ describe('SelectionBox', () => {
       render(<SelectionBox showSize><h1>Nama</h1></SelectionBox>)
       act(() => {})
       expect(screen.getByTestId('size-label')).toHaveTextContent('412 × 168')
+      // di layar sempit label ini bertabrakan dengan badge di bawah kotak
+      expect(screen.getByTestId('size-label')).toHaveClass('max-md:hidden')
     })
   })
 })
