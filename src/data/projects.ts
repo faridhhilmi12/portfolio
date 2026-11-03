@@ -18,8 +18,8 @@ export interface Project {
 }
 
 export const projects: Project[] = [
-  { id: 'p1', year: 2026, wire: 'app', tags: ['Figma', 'REST API', 'Responsive UI'] },
-  { id: 'p2', year: 2026, wire: 'dashboard', tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'shadcn/ui', 'Recharts'] },
+  { id: 'p1', year: 2026, wire: 'app', image: '/assets/waldo.jpg', tags: ['Figma', 'REST API', 'Responsive UI'] },
+  { id: 'p2', year: 2026, wire: 'dashboard', image: '/assets/dashboard-bkd.jpg', tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'shadcn/ui', 'Recharts'] },
   { id: 'p3', year: 2026, wire: 'lms', isPrivate: true, tags: ['Laravel 12', 'PHP', 'Role-based access'] },
-  { id: 'p4', year: 2025, wire: 'site', tags: ['Figma', 'Wireframe', 'High-fidelity UI'] },
+  { id: 'p4', year: 2025, wire: 'site', image: '/assets/himalkom.jpg', tags: ['Figma', 'Wireframe', 'High-fidelity UI'] },
 ]

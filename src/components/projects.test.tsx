@@ -71,18 +71,32 @@ describe('Projects', () => {
   })
 
   describe('preview image', () => {
+    const original = projects[0].image
     afterEach(() => {
-      delete projects[0].image
+      projects[0].image = original
     })
 
     it('shows the image when provided and falls back to the wireframe when it fails to load', () => {
       projects[0].image = '/x.png'
-      const { container } = renderProjects()
-      const img = container.querySelector('img') as HTMLImageElement
+      renderProjects()
+      const frame = screen.getAllByTestId('project-frame')[0]
+      const img = frame.querySelector('img') as HTMLImageElement
       expect(img).toHaveAttribute('src', '/x.png')
       fireEvent.error(img)
-      expect(container.querySelector('img')).toBeNull()
-      expect(within(screen.getAllByTestId('project-frame')[0]).getByTestId('wireframe')).toBeInTheDocument()
+      expect(frame.querySelector('img')).toBeNull()
+      expect(within(frame).getByTestId('wireframe')).toBeInTheDocument()
+    })
+
+    it('renders the real screenshot of each public project and a wireframe for the private one', () => {
+      renderProjects()
+      const frames = screen.getAllByTestId('project-frame')
+      expect(frames.map((f) => f.querySelector('img')?.getAttribute('src') ?? null)).toEqual([
+        '/assets/waldo.jpg',
+        '/assets/dashboard-bkd.jpg',
+        null,
+        '/assets/himalkom.jpg',
+      ])
+      expect(within(frames[2]).getByTestId('wireframe')).toBeInTheDocument()
     })
   })
 })
