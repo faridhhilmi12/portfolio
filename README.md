@@ -30,8 +30,8 @@ npm run build    # tsc + build ke dist/
 - **Warna aksen:** `--c-select` dan `--c-select-strong` di `src/index.css`, ada dua set (terang dan gelap).
 - **Pasangan Desain↔Kode** (skill yang ikut menyala): `pairs` di `src/data/skills.ts`.
 
-## Yang harus diganti sebelum rilis
-Alamat sementara `https://faridhhilmi12.netlify.app/` tertulis di:
+## Alamat situs
+Alamat situs saat ini `https://gleaming-stardust-a6c7e7.netlify.app/` tertulis di tempat berikut. Kalau domain berubah (misalnya setelah mengganti nama situs di Netlify atau memakai domain sendiri), ganti di semuanya:
 - `index.html`: `canonical`, `og:url`, `og:image`, `twitter:image`, dan JSON-LD (`url`, `image`)
 - `public/robots.txt`
 - `public/sitemap.xml`
@@ -41,7 +41,7 @@ Tautan sosial di JSON-LD (`index.html`) harus selalu sama dengan `src/data/links
 ## Deploy ke Netlify
 1. Dorong repo ini ke GitHub.
 2. Di Netlify: Add new site, Import from Git, pilih repo. Build command `npm run build`, publish directory `dist` (sudah diatur di `netlify.toml`).
-3. Setelah alamat final jelas, ganti alamat sementara di atas lalu push lagi.
+3. Pastikan situs tidak diberi proteksi (Netlify: Site configuration, Access & security, Visitor access harus publik), kalau tidak pengunjung dan pemindai tautan hanya melihat halaman login.
 
 Vercel juga bisa: pilih preset Vite, tanpa berkas tambahan.
 

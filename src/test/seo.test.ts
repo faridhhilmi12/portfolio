@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
 
-const ORIGIN = 'https://faridhhilmi12.netlify.app/'
+const ORIGIN = 'https://gleaming-stardust-a6c7e7.netlify.app/'
 const read = (p: string) => readFileSync(resolve(__dirname, '../..', p), 'utf8')
 
 describe('static SEO shell', () => {
