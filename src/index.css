@@ -67,3 +67,6 @@ body {
   outline-offset: 3px;
   border-radius: 4px;
 }
+
+/* dipasang sesaat saat tema berganti agar warna tidak memudar tidak serempak */
+.no-anim, .no-anim *, .no-anim *::before, .no-anim *::after { transition: none !important; }
