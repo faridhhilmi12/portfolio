@@ -23,3 +23,11 @@ export const projects: Project[] = [
   { id: 'p3', year: 2026, wire: 'lms', isPrivate: true, tags: ['Laravel 12', 'PHP', 'Role-based access'] },
   { id: 'p4', year: 2025, wire: 'site', image: '/assets/himalkom.jpg', tags: ['Figma', 'Wireframe', 'High-fidelity UI'] },
 ]
+
+/** Urutan tampil di layar sempit (satu kolom). Di layar lebar urutan grid tetap p1..p4. */
+const MOBILE_ORDER: Project['id'][] = ['p3', 'p4', 'p2', 'p1']
+
+export function orderedProjects(wide: boolean): Project[] {
+  if (wide) return projects
+  return MOBILE_ORDER.map((id) => projects.find((p) => p.id === id)!)
+}

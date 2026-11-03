@@ -26,7 +26,8 @@ npm run build    # tsc + build ke dist/
 ## Mengubah isi
 - **Teks:** ubah `src/i18n/id.ts` dan `src/i18n/en.ts` bersamaan. Build gagal kalau kunci EN ada yang terlewat.
 - **Proyek:** tambah atau ubah entri di `src/data/projects.ts`, lalu tambahkan teksnya (`work.<id>.role|title|sub|desc`) di kedua kamus. Isi `image` dengan jalur gambar (misalnya `/assets/waldo.png`, taruh file di `public/assets/`) untuk mengganti ilustrasi wireframe dengan screenshot asli.
-- **Screenshot asli** disimpan di `foto-asli/` (di-ignore git, tidak ikut deploy). Yang dipakai situs adalah JPG 1200×750 hasil potongan di `public/assets/`. Proyek privat (LMS Telkomsat) sengaja tanpa screenshot, dan tes memastikannya.
+- **Screenshot asli** disimpan di `foto-asli/` (di-ignore git, tidak ikut deploy). Yang dipakai situs adalah JPG 1200×750 hasil potongan di `public/assets/`. LMS Telkomsat (proyek internal) sengaja tanpa screenshot: kartunya wireframe dan catatannya menjelaskan alasannya (dijaga tes).
+- **Urutan proyek:** di layar lebar mengikuti `projects` (Waldo, BKD, LMS, Himalkom). Di mobile urutannya LMS, Himalkom, BKD, Waldo; ubah `MOBILE_ORDER` di `src/data/projects.ts`. Proyek pertama yang tampil otomatis terbuka.
 - **Link kontak:** `src/data/links.ts`. Link yang dikosongkan otomatis tidak ditampilkan.
 - **Warna aksen:** `--c-select` dan `--c-select-strong` di `src/index.css`, ada dua set (terang dan gelap).
 - **Pasangan Desain↔Kode** (skill yang ikut menyala): `pairs` di `src/data/skills.ts`.

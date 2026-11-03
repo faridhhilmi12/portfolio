@@ -36,7 +36,7 @@ export const id = {
   'work.p3.title': 'LMS Telkomsat',
   'work.p3.sub': 'Learning Management System',
   'work.p3.desc': 'Sistem pembelajaran untuk kebutuhan internal perusahaan, dengan login, pembagian hak akses admin dan pengguna, serta pengelolaan konten pembelajaran.',
-  'work.p3.note': 'Sistem internal perusahaan, jadi tautan dan tangkapan layarnya tidak dipublikasikan. Saya bisa menjelaskan alur dan fiturnya saat diskusi.',
+  'work.p3.note': 'Sistem internal perusahaan yang hanya bisa diakses karyawan, dan isinya tidak bisa dibagikan, jadi tautan dan tangkapan layarnya tidak ditampilkan. Gambar pada kartu hanyalah ilustrasi wireframe, bukan tampilan sebenarnya. Saya bisa menjelaskan alur dan fiturnya saat diskusi.',
   'work.p4.role': 'UI designer',
   'work.p4.title': 'Website Himalkom IPB',
   'work.p4.sub': 'Himpunan Mahasiswa Ilmu Komputer',

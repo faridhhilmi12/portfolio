@@ -38,7 +38,7 @@ export const en: Record<MessageKey, string> = {
   'work.p3.title': 'LMS Telkomsat',
   'work.p3.sub': 'Learning Management System',
   'work.p3.desc': 'A learning system for internal company use, with sign-in, separate admin and user access, and learning content management.',
-  'work.p3.note': 'This is an internal company system, so its link and screenshots aren’t public. I’m happy to walk through its flows and features in a call.',
+  'work.p3.note': 'This is an internal company system that only employees can access, and its contents can’t be shared, so its link and screenshots aren’t shown. The image on the card is just a wireframe illustration, not the real interface. I’m happy to walk through its flows and features in a call.',
   'work.p4.role': 'UI designer',
   'work.p4.title': 'Himalkom IPB website',
   'work.p4.sub': 'Computer Science Student Association',

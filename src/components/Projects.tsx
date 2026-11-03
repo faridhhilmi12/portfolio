@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Reveal } from '../canvas/Reveal'
-import { projects, type Project } from '../data/projects'
+import { orderedProjects, projects, type Project } from '../data/projects'
 import { useT } from '../i18n/LangProvider'
 import { useMedia } from '../lib/useMedia'
 import { Inspect } from './Inspect'
@@ -8,9 +8,11 @@ import { ProjectFrame } from './ProjectFrame'
 
 export function Projects() {
   const t = useT()
-  const [selectedId, setSelectedId] = useState<Project['id']>('p1')
   const wide = useMedia('(min-width: 768px)')
-  const selected = projects.find((p) => p.id === selectedId) ?? projects[0]
+  const list = orderedProjects(wide)
+  // proyek pertama yang tampil di layar saat ini terbuka lebih dulu
+  const [selectedId, setSelectedId] = useState<Project['id']>(() => list[0].id)
+  const selected = projects.find((p) => p.id === selectedId) ?? list[0]
 
   return (
     <section
@@ -28,7 +30,7 @@ export function Projects() {
       </Reveal>
 
       <div className="grid grid-cols-1 gap-x-10 md:grid-cols-2">
-        {projects.map((project, i) => (
+        {list.map((project, i) => (
           <Reveal key={project.id} delay={i * 0.05}>
             <ProjectFrame
               project={project}

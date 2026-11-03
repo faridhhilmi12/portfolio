@@ -5,6 +5,7 @@ import { LangProvider, useLang } from '../i18n/LangProvider'
 import { id } from '../i18n/id'
 import { en } from '../i18n/en'
 import { projects } from '../data/projects'
+import { mockMedia } from '../test/media'
 import { Projects } from './Projects'
 
 function LangSwitch() {
@@ -25,9 +26,60 @@ const inspect = () => screen.getByRole('region', { name: 'Inspect' })
 
 beforeEach(() => {
   localStorage.setItem('lang', 'id')
+  mockMedia({ finePointer: true, wide: true })
+})
+
+const frameTitles = () =>
+  screen.getAllByTestId('project-frame').map((f) => f.querySelector('button')?.getAttribute('aria-label'))
+
+describe('Projects on a mobile screen', () => {
+  beforeEach(() => {
+    mockMedia({ finePointer: true, wide: false })
+  })
+
+  it('lists LMS, Himalkom, BKD, then Waldo', () => {
+    renderProjects()
+    expect(frameTitles()).toEqual([
+      id['work.p3.title'],
+      id['work.p4.title'],
+      id['work.p2.title'],
+      id['work.p1.title'],
+    ])
+  })
+
+  it('opens the first listed project (LMS) by default, with its details right under its card', () => {
+    renderProjects()
+    expect(screen.getByRole('button', { name: id['work.p3.title'] })).toHaveAttribute('aria-pressed', 'true')
+    const firstFrame = screen.getAllByTestId('project-frame')[0]
+    expect(firstFrame.parentElement).toContainElement(inspect())
+    expect(within(inspect()).getByText(id['work.p3.note'])).toBeInTheDocument()
+  })
+
+  it('keeps the selection when the screen grows to the wide layout', () => {
+    const { rerender } = renderProjects()
+    fireEvent.click(screen.getByRole('button', { name: id['work.p4.title'] }))
+    mockMedia({ finePointer: true, wide: true })
+    rerender(
+      <LangProvider>
+        <LangSwitch />
+        <Projects />
+      </LangProvider>,
+    )
+    expect(screen.getByRole('button', { name: id['work.p4.title'] })).toHaveAttribute('aria-pressed', 'true')
+  })
 })
 
 describe('Projects', () => {
+  it('lists Waldo, BKD, LMS, then Himalkom on wide screens', () => {
+    renderProjects()
+    expect(frameTitles()).toEqual([
+      id['work.p1.title'],
+      id['work.p2.title'],
+      id['work.p3.title'],
+      id['work.p4.title'],
+    ])
+  })
+
   it('renders four frames and selects the first by default', () => {
     renderProjects()
     const first = screen.getByRole('button', { name: id['work.p1.title'] })
@@ -87,7 +139,7 @@ describe('Projects', () => {
       expect(within(frame).getByTestId('wireframe')).toBeInTheDocument()
     })
 
-    it('renders the real screenshot of each public project and a wireframe for the private one', () => {
+    it('renders real screenshots for the public projects and a wireframe for the private LMS', () => {
       renderProjects()
       const frames = screen.getAllByTestId('project-frame')
       expect(frames.map((f) => f.querySelector('img')?.getAttribute('src') ?? null)).toEqual([
@@ -97,6 +149,7 @@ describe('Projects', () => {
         '/assets/himalkom.jpg',
       ])
       expect(within(frames[2]).getByTestId('wireframe')).toBeInTheDocument()
+      expect(screen.getAllByTestId('wireframe')).toHaveLength(1)
     })
   })
 })
