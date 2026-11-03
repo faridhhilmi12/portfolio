@@ -2,3 +2,4 @@ node_modules
 dist
 .superpowers
 Claude outputs/
+.claude/
