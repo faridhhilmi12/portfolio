@@ -21,8 +21,8 @@ export function Hero() {
     <>
       <img
         src="/assets/farid.jpg"
-        width={640}
-        height={640}
+        width={900}
+        height={1193}
         alt={t('hero.alt')}
         fetchPriority="high"
         decoding="async"

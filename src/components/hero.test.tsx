@@ -29,6 +29,9 @@ describe('Hero', () => {
     renderHero()
     const img = screen.getByRole('img', { name: 'Foto Muhammad Farid Hilmi' })
     expect(img.getAttribute('src')).toMatch(/\/assets\/farid\.jpg$/)
+    // ukuran asli berkas, supaya browser menyisakan ruang sebelum foto termuat
+    expect(img).toHaveAttribute('width', '900')
+    expect(img).toHaveAttribute('height', '1193')
   })
 
   it('makes the photo draggable with a mouse and motion allowed', () => {

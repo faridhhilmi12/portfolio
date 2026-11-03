@@ -17,6 +17,11 @@ describe('static SEO shell', () => {
     expect(html).toContain('<noscript>')
   })
 
+  it('declares the real dimensions of the profile photo for link previews', () => {
+    expect(html).toContain('property="og:image:width" content="900"')
+    expect(html).toContain('property="og:image:height" content="1193"')
+  })
+
   it('has valid Person JSON-LD', () => {
     const m = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)
     expect(m).not.toBeNull()
