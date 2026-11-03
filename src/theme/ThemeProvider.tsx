@@ -16,6 +16,20 @@ function systemTheme(): Theme {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 }
 
+const THEME_COLOR: Record<Theme, string> = { light: '#FFFFFF', dark: '#121214' }
+
+/** Pilihan manual menggantikan dua meta theme-color berbasis media dengan satu meta tetap. */
+function syncThemeColor(theme: Theme): void {
+  document.head.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]').forEach((meta, i) => {
+    if (i === 0) {
+      meta.removeAttribute('media')
+      meta.content = THEME_COLOR[theme]
+    } else {
+      meta.remove()
+    }
+  })
+}
+
 function initialTheme(): Theme {
   const attr = document.documentElement.dataset.theme
   if (isTheme(attr)) return attr
@@ -30,6 +44,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme
+    if (chosen.current) syncThemeColor(theme)
   }, [theme])
 
   useEffect(() => {

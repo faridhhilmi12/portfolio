@@ -61,6 +61,47 @@ describe('ThemeProvider', () => {
     vi.useRealTimers()
   })
 
+  describe('browser theme-color', () => {
+    const addMetas = () => {
+      for (const media of ['(prefers-color-scheme: light)', '(prefers-color-scheme: dark)']) {
+        const m = document.createElement('meta')
+        m.name = 'theme-color'
+        m.media = media
+        m.content = media.includes('dark') ? '#121214' : '#FFFFFF'
+        document.head.appendChild(m)
+      }
+    }
+    afterEach(() => {
+      document.head.querySelectorAll('meta[name="theme-color"]').forEach((m) => m.remove())
+    })
+
+    it('collapses to a single meta with the chosen color when the user toggles', () => {
+      addMetas()
+      localStorage.setItem('theme', 'light')
+      render(<ThemeProvider><Probe /></ThemeProvider>)
+      act(() => screen.getByText('toggle').click())
+      const metas = document.head.querySelectorAll('meta[name="theme-color"]')
+      expect(metas).toHaveLength(1)
+      expect(metas[0]).not.toHaveAttribute('media')
+      expect(metas[0]).toHaveAttribute('content', '#121214')
+    })
+
+    it('applies a previously stored choice on load', () => {
+      addMetas()
+      localStorage.setItem('theme', 'dark')
+      render(<ThemeProvider><Probe /></ThemeProvider>)
+      const metas = document.head.querySelectorAll('meta[name="theme-color"]')
+      expect(metas).toHaveLength(1)
+      expect(metas[0]).toHaveAttribute('content', '#121214')
+    })
+
+    it('leaves the media-based metas alone when the user never chose', () => {
+      addMetas()
+      render(<ThemeProvider><Probe /></ThemeProvider>)
+      expect(document.head.querySelectorAll('meta[name="theme-color"]')).toHaveLength(2)
+    })
+  })
+
   it('still toggles when storage is blocked', () => {
     vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => { throw new Error('blocked') })
     vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => { throw new Error('blocked') })

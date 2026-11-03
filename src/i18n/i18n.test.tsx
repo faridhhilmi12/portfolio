@@ -72,7 +72,10 @@ describe('LangProvider', () => {
   it('still renders and switches when storage is blocked', () => {
     vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => { throw new Error('blocked') })
     vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => { throw new Error('blocked') })
+    // mulai dari ID (lewat navigator) supaya klik benar-benar mengubah bahasa
+    vi.spyOn(navigator, 'language', 'get').mockReturnValue('id-ID')
     render(<LangProvider><Probe /></LangProvider>)
+    expect(screen.getByTestId('text')).toHaveTextContent('Karya')
     act(() => screen.getByText('to-en').click())
     expect(screen.getByTestId('text')).toHaveTextContent('Work')
   })

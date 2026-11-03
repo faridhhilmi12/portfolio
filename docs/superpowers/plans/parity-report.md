@@ -3,7 +3,7 @@
 Tanggal: 2026-11-03. Hasil dari sesi eksekusi plan `2026-11-03-portfolio-react.md`.
 
 ## Hasil otomatis
-- `npx vitest run`: 9 berkas, 51 tes, lulus semua.
+- `npx vitest run`: 9 berkas, 55 tes, lulus semua.
 - `npx tsc -b`: bersih.
 - `npm run build`: berhasil. `dist/index.html` memuat canonical, `og:*`, `twitter:card`, dua `theme-color`, JSON-LD `Person`, dan `<noscript>`. `dist/` juga memuat `robots.txt`, `sitemap.xml`, `assets/farid.jpg`. Bundel JS 390 KB (gzip 125 KB).
 
@@ -30,6 +30,17 @@ Tanggal: 2026-11-03. Hasil dari sesi eksekusi plan `2026-11-03-portfolio-react.m
 2. Scrollbar horizontal dari lapisan dot grid `-inset-4` → `overflow-x-clip` pada `DotGrid`; tes RED→GREEN.
 3. Label ukuran `244 × 104` bertabrakan dengan badge di mobile → disembunyikan di bawah `md`; tes RED→GREEN.
 4. Kelas `no-anim` bisa tertinggal bila rAF tertahan → cadangan `setTimeout`; tes RED→GREEN.
+
+## Temuan review akhir yang diperbaiki
+1. Warna address bar (`theme-color`) tidak mengikuti tombol tema, berbeda dari versi statis → `syncThemeColor` di `ThemeProvider`; 2 tes RED→GREEN (+1 tes pelindung).
+2. Menu mobile yang terbuka ikut terbawa ke lebar desktop saat layar diputar → gaya dropdown dibatasi `max-md:`; tes RED→GREEN.
+3. Tes bahasa dengan storage terblokir tidak bisa gagal → dimulai dari ID lewat `navigator.language`; terbukti gagal di bawah mutasi (state hanya berubah bila storage berhasil).
+
+## Temuan Minor yang ditunda
+- Transisi layout pada panel Inspect belum ada (spec bagian 4).
+- Kartu proyek di mobile belum punya `aria-expanded`/`aria-controls`, dan judul proyek bukan heading.
+- Deskripsi proyek yang tidak terpilih tidak ada di DOM, jadi tidak terindeks; `<noscript>` hanya memuat ringkasan hero.
+- Garis seleksi menganimasikan `clip-path` (spec: hanya transform/opacity); sama seperti versi statis.
 
 ## Yang tidak bisa dipastikan di sini
 - **Smooth-scroll:** pane preview tidak menjalankan smooth-scroll (juga pada `scrollTo` polos). Perlu dicek di browser Anda.

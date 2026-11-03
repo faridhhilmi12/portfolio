@@ -77,7 +77,7 @@ export function Nav() {
             id="nav-links"
             className={`m-0 list-none gap-6 p-0 md:ml-auto md:flex ${
               open
-                ? 'absolute left-0 right-0 top-full flex flex-col gap-0 border-b border-line bg-paper px-[clamp(16px,4vw,40px)] pb-4 pt-2'
+                ? 'max-md:absolute max-md:left-0 max-md:right-0 max-md:top-full max-md:flex max-md:flex-col max-md:gap-0 max-md:border-b max-md:border-line max-md:bg-paper max-md:px-[clamp(16px,4vw,40px)] max-md:pb-4 max-md:pt-2'
                 : 'hidden'
             }`}
           >

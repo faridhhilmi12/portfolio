@@ -36,6 +36,16 @@ describe('Nav', () => {
     expect(btn).toHaveAttribute('aria-expanded', 'false')
   })
 
+  it('applies the open-menu dropdown styles only below the md breakpoint', async () => {
+    const user = userEvent.setup()
+    renderNav()
+    await user.click(screen.getByRole('button', { name: 'Buka menu' }))
+    const list = document.getElementById('nav-links') as HTMLElement
+    expect(list).toHaveClass('max-md:absolute', 'max-md:flex-col')
+    expect(list).not.toHaveClass('absolute')
+    expect(list).not.toHaveClass('flex-col')
+  })
+
   it('EN button switches language', async () => {
     const user = userEvent.setup()
     renderNav()
